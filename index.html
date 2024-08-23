@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter JSON para Objeto JavaScript</title>
+</head>
+<body>
+    <h1>Carregar e Converter Arquivo JSON Estático</h1>
+    <pre id="output"></pre>
+
+    <script>
+        // URL do arquivo JSON estático
+        const jsonUrl = 'data.json';
+
+        // Função para buscar e converter o JSON em objeto JavaScript
+        async function loadJson() {
+            try {
+                // Faz a requisição para o arquivo JSON
+                const response = await fetch(jsonUrl);
+                
+                // Verifica se a resposta foi bem-sucedida
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar o arquivo JSON');
+                }
+
+                // Converte o JSON para um objeto JavaScript
+                const jsonObject = await response.json();
+
+                // Exibe o objeto JavaScript no console
+                console.log(jsonObject);
+
+                // Exibe o objeto JavaScript no documento
+                const output = document.getElementById('output');
+                output.textContent = JSON.stringify(jsonObject, null, 2);
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('output').textContent = 'Erro ao carregar o arquivo JSON.';
+            }
+        }
+
+        // Chama a função ao carregar a página
+        loadJson();
+    </script>
+</body>
+</html>
